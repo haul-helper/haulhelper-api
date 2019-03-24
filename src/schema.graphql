@@ -1,0 +1,64 @@
+type Query {
+  me: User
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+}
+
+type Subscription {
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID! @unique
+  username: String!
+  specialCode: String!
+  email: String!
+  hauls: [Haul!]!
+}
+
+type Haul {
+  id: ID!
+  item: [Item!]!
+}
+
+type Item {
+  id: ID!
+  name: String!
+  brand: String!
+  clothingType: ClothingType!
+  wtc: String!
+  price: Float!
+  tags: [Tag!]!
+  images: [Image!]!
+  rating: String!
+  greenLightVotes: Int
+  redLightVots: Int
+  deadLinkVotes: Int
+}
+
+type Tag {
+  id: ID!
+  tagName: String!
+}
+
+type Image {
+  id: ID!
+  imageUrl: String!
+  imageAltTitle: String!
+}
+
+enum ClothingType {
+  ACCESSORIES
+  UPPERBODY
+  LOWERBODY
+  SHOES
+  HEADWEAR
+  ARMWEAR
+}

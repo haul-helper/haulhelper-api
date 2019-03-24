@@ -1,0 +1,21 @@
+mutation {
+  user1: createUser(
+    data: {
+      email: "austin@haulhelper.com"
+      username: "Austin"
+      password: "$2b$10$dqyYw5XovLjpmkYNiRDEWuwKaRAvLaG45fnXE5b3KTccKZcRPka2m" # "secret42"
+    }
+  ) {
+    id
+  }
+
+  user2: createUser(
+    data: {
+      email: "evan@haulhelper.com"
+      username: "Evan"
+      password: "$2b$10$o6KioO.taArzboM44Ig85O3ZFZYZpR3XD7mI8T29eP4znU/.xyJbW" # "secret43"
+    }
+  ) {
+    id
+  }
+}
