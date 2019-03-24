@@ -1,13 +1,17 @@
-import { Query } from "./Query";
-import { Subscription } from "./Subscription";
-import { auth } from "./Mutation/auth";
-import { User } from "./User";
+import { HaulQueries } from "./Query/Haul";
+import { Subscription } from "./Subscriptions/Subscription";
+import { Auth } from "./Mutation/Auth";
+import { HaulMutations } from "./Mutation/Haul";
+import { User } from "./Query/User";
 
 export default {
-  Query,
   Mutation: {
-    ...auth
+    ...Auth,
+    ...HaulMutations
   },
-  Subscription,
-  User
+  Query: {
+    ...User,
+    ...HaulQueries
+  },
+  Subscription
 };

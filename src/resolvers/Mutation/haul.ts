@@ -1,39 +1,59 @@
 import { getUserId, Context } from "../../utils";
 
-export const haul = {
-  // async createDraft(parent, { title, content }, ctx: Context, info) {
-  //   const userId = getUserId(ctx)
-  //   return ctx.prisma.createPost({
-  //     title,
-  //     content,
-  //     author: {
-  //       connect: { id: userId },
-  //     },
-  //   })
-  // },
-  // async publish(parent, { id }, ctx: Context, info) {
-  //   const userId = getUserId(ctx)
-  //   const postExists = await ctx.prisma.$exists.post({
-  //     id,
-  //     author: { id: userId },
-  //   })
-  //   if (!postExists) {
-  //     throw new Error(`Post not found or you're not the author`)
-  //   }
-  //   return ctx.prisma.updatePost({
-  //     where: { id },
-  //     data: { published: true },
-  //   })
-  // },
-  // async deletePost(parent, { id }, ctx: Context, info) {
-  //   const userId = getUserId(ctx)
-  //   const postExists = await ctx.prisma.$exists.post({
-  //     id,
-  //     author: { id: userId },
-  //   })
-  //   if (!postExists) {
-  //     throw new Error(`Post not found or you're not the author`)
-  //   }
-  //   return ctx.prisma.deletePost({ id })
-  // },
+export const HaulMutations = {
+  async createHaul(parent, args, ctx: Context, info) {
+    const userId = getUserId(ctx);
+    return ctx.prisma.createHaul({
+      weight: args.weight,
+      user: {
+        connect: { id: userId }
+      },
+      items: {
+        connect: [
+          {
+            id: args.id
+          }
+        ]
+      }
+    });
+  },
+  async updateHaul(parent, args, ctx: Context, info) {
+    const userId = getUserId(ctx);
+    const haulExists = await ctx.prisma.$exists.haul({
+      id: args.id,
+      user: { id: userId }
+    });
+    if (!haulExists) {
+      throw new Error(`Haul not found or you're not the owner`);
+    }
+    return ctx.prisma.updateHaul({
+      where: { id: args.id },
+      data: {
+        weight: args.weight,
+        items: {
+          updateMany: [
+            {
+              where: {
+                id: args.items.id
+              },
+              data: {
+                ...args.items
+              }
+            }
+          ]
+        }
+      }
+    });
+  },
+  async deleteHaul(parent, args, ctx: Context, info) {
+    const userId = getUserId(ctx);
+    const haulExists = await ctx.prisma.$exists.haul({
+      id: args.id,
+      user: { id: userId }
+    });
+    if (!haulExists) {
+      throw new Error(`Haul not found or you're not the author`);
+    }
+    return ctx.prisma.deleteHaul({ id: args.id });
+  }
 };
