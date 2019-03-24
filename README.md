@@ -3,7 +3,7 @@
 <br />
 
 <div align="center"><strong>Backend Prisma GraphQL API service</strong></div>
-<div align="center">Advanced starter kit for a flexible GraphQL server for TypeScript - based on best practices from the GraphQL community.</div>
+<div align="center">This is the main backend API service for the Haul Helper application</div>
 
 ## Schema
 
@@ -45,13 +45,11 @@ TODO
 
 ### Project structure
 
-![](https://imgur.com/95faUsa.png)
-
 | File name 　　　　　　　　　　　　　　| Description 　　　　　　　　<br><br>|
 | :--  | :--         |
 | `├── .env` | Defines environment variables |
 | `├── .graphqlconfig.yml` | Configuration file based on [`graphql-config`](https://github.com/prisma/graphql-config) (e.g. used by GraphQL Playground).|
-| `└── database ` (_directory_) | _Contains all files that are related to the Prisma database service_ |\
+| `└── prisma ` (_directory_) | _Contains all files that are related to the Prisma database service_ |\
 | `　　├── prisma.yml` | The root configuration file for your Prisma database service ([docs](https://www.prismagraphql.com/docs/reference/prisma.yml/overview-and-example-foatho8aip)) |
 | `　　└── datamodel.graphql` | Defines your data model (written in [GraphQL SDL](https://blog.graph.cool/graphql-sdl-schema-definition-language-6755bcb9ce51)) |
 | `└── src ` (_directory_) | _Contains the source files for your GraphQL server_ |
