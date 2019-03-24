@@ -1,14 +1,43 @@
+# Query - Mutation - Subscription
+
 type Query {
-  me: User
+  me: User!
+  usersHauls(id: ID!): User!
+  hauls: [Haul!]!
+  haulById(id: ID!): Haul!
+  items: [Item!]!
+  itemById(id: ID!): Item!
+  images: [Image!]!
+  image(id: ID!): Image!
 }
 
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+  createHaul(items: [ItemUpdateInput!]!, weight: Int!): Haul!
+  updateHaul(items: [ItemUpdateInput!]!, weight: Int!): Haul!
+  deleteHaul(id: ID!): Haul!
 }
 
 type Subscription {
+  haulSubscription: Haul!
 }
+
+# Inputs
+
+input ItemUpdateInput {
+  name: String!
+  brand: String!
+  clothingType: ClothingType!
+  wtc: String!
+  price: Float!
+  rating: String!
+  greenLightVotes: Int
+  redLightVots: Int
+  deadLinkVotes: Int
+}
+
+# Types
 
 type AuthPayload {
   token: String!
@@ -16,16 +45,19 @@ type AuthPayload {
 }
 
 type User {
-  id: ID! @unique
+  id: ID!
   username: String!
   specialCode: String!
   email: String!
+  role: String!
   hauls: [Haul!]!
 }
 
 type Haul {
   id: ID!
+  user: User!
   item: [Item!]!
+  weight: Int
 }
 
 type Item {
