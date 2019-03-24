@@ -10,6 +10,14 @@ type User {
 
 type Haul {
   id: ID! @unique
+  user: User!
+  items: [Item!]!
+  weight: Int!
+}
+
+type Wishlist {
+  id: ID! @unique
+  user: User!
   item: [Item!]!
 }
 
