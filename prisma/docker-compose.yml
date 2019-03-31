@@ -1,13 +1,15 @@
 version: '3'
 services:
   haulhelper-prod:
-    image: prismagraphql/prisma:1.27
+    image: prismagraphql/prisma:1.29
+    env_file:
+    - .env
     restart: always
     ports:
-    - "4222:4222"
+    - "${PRISMA_PORT}:${PRISMA_PORT}"
     environment:
       PRISMA_CONFIG: |
-        port: 4222
+        port: PRISMA_PORT
         # uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
         # managementApiSecret: my-secret
         databases:
@@ -15,19 +17,21 @@ services:
             database: haulhelper-prod
             connector: postgres
             host: postgres
-            user: prisma
-            password: prisma
+            user: PRISMA_USERNAME
+            password: PRISMA_PASSWORD
             rawAccess: true
             port: 5432
             migrations: true
   haulhelper-dev:
-    image: prismagraphql/prisma:1.27
+    image: prismagraphql/prisma:1.29
+    env_file:
+    - .env.dev
     restart: always
     ports:
-    - "4333:4333"
+    - "${PRISMA_PORT}:${PRISMA_PORT}"
     environment:
       PRISMA_CONFIG: |
-        port: 4333
+        port: PRISMA_PORT
         # uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
         # managementApiSecret: my-secret
         databases:
@@ -35,8 +39,8 @@ services:
             database: haulhelper-dev
             connector: postgres
             host: postgres
-            user: prisma
-            password: prisma
+            user: PRISMA_USERNAME
+            password: PRISMA_PASSWORD
             rawAccess: true
             port: 5432
             migrations: true
@@ -46,8 +50,8 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: prisma
-      POSTGRES_PASSWORD: prisma
+      POSTGRES_USER: PRISMA_USERNAME
+      POSTGRES_PASSWORD: PRISMA_PASSWORD
     volumes:
       - postgres:/var/lib/postgresql/data
 volumes:
