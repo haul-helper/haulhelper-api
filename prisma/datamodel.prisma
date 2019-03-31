@@ -2,9 +2,9 @@ type User {
   id: ID! @unique
   username: String!
   password: String!
-  specialCode: String!
+  specialCode: String
   email: String! @unique
-  role: String!
+  role: Role!
   hauls: [Haul!]!
 }
 
@@ -31,9 +31,9 @@ type Item {
   tags: [Tag!]!
   images: [Image!]!
   rating: String!
-  greenLightVotes: Int @default(value: 0)
-  redLightVots: Int @default(value: 0)
-  deadLinkVotes: Int @default(value: 0)
+  greenLightVotes: Int! @default(value: 0)
+  redLightVots: Int! @default(value: 0)
+  deadLinkVotes: Int! @default(value: 0)
 }
 
 type Tag {
@@ -54,4 +54,9 @@ enum ClothingType {
   SHOES
   HEADWEAR
   ARMWEAR
+}
+
+enum Role {
+  ADMIN
+  USER
 }
