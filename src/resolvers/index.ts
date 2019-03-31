@@ -1,8 +1,13 @@
+// Queries
 import { HaulQueries } from "./Query/Haul";
+import { User } from "./Query/User";
+import { ImageQueries } from "./Query/Image";
+import { ItemQueries } from "./Query/Item";
+// Subscriptions
 import { Subscription } from "./Subscriptions/Subscription";
+//Mutations
 import { Auth } from "./Mutation/Auth";
 import { HaulMutations } from "./Mutation/Haul";
-import { User } from "./Query/User";
 
 export default {
   Mutation: {
@@ -11,7 +16,9 @@ export default {
   },
   Query: {
     ...User,
-    ...HaulQueries
+    ...HaulQueries,
+    ...ImageQueries,
+    ...ItemQueries
   },
   Subscription
 };
