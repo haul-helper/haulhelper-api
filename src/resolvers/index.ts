@@ -6,8 +6,8 @@ import { ItemQueries } from "./Query/Item";
 // Subscriptions
 import { Subscription } from "./Subscriptions/Subscription";
 //Mutations
-import { Auth } from "./Mutation/Auth";
-import { HaulMutations } from "./Mutation/Haul";
+import { Auth } from "./Mutation/auth";
+import { HaulMutations } from "./Mutation/haul";
 
 export default {
   Mutation: {
