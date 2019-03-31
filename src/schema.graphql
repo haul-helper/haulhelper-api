@@ -2,17 +2,18 @@
 
 type Query {
   me: User!
-  usersHauls(id: ID!): User!
+  user(id: ID!): User!
+  users: [User!]!
   hauls: [Haul!]!
-  haulById(id: ID!): Haul!
+  haul(id: ID!): Haul!
   items: [Item!]!
-  itemById(id: ID!): Item!
+  item(id: ID!): Item!
   images: [Image!]!
   image(id: ID!): Image!
 }
 
 type Mutation {
-  signup(email: String!, password: String!, name: String!): AuthPayload!
+  signup(email: String!, password: String!, username: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   createHaul(items: [ItemUpdateInput!]!, weight: Int!): Haul!
   updateHaul(items: [ItemUpdateInput!]!, weight: Int!): Haul!
@@ -47,9 +48,9 @@ type AuthPayload {
 type User {
   id: ID!
   username: String!
-  specialCode: String!
+  specialCode: String
   email: String!
-  role: String!
+  role: Role!
   hauls: [Haul!]!
 }
 
@@ -93,4 +94,9 @@ enum ClothingType {
   SHOES
   HEADWEAR
   ARMWEAR
+}
+
+enum Role {
+  ADMIN
+  USER
 }
