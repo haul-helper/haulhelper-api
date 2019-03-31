@@ -1,6 +1,7 @@
 import { getUserId, Context } from "../../utils";
 
 export const HaulMutations = {
+  // TODO: Comment docs
   async createHaul(parent, args, ctx: Context, info) {
     const userId = getUserId(ctx);
     return ctx.prisma.createHaul({
@@ -17,6 +18,7 @@ export const HaulMutations = {
       }
     });
   },
+  // TODO: Comment docs
   async updateHaul(parent, args, ctx: Context, info) {
     const userId = getUserId(ctx);
     const haulExists = await ctx.prisma.$exists.haul({
@@ -45,6 +47,7 @@ export const HaulMutations = {
       }
     });
   },
+  // TODO: Comment docs
   async deleteHaul(parent, args, ctx: Context, info) {
     const userId = getUserId(ctx);
     const haulExists = await ctx.prisma.$exists.haul({

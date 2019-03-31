@@ -1,11 +1,12 @@
 import { GraphQLServer } from "graphql-yoga";
 import { prisma } from "./generated/prisma-client";
-import ora from 'ora';
+import ora from "ora";
 import resolvers from "./resolvers";
 
 const server = new GraphQLServer({
   typeDefs: "./src/schema.graphql",
   resolvers: resolvers as any,
+  // mocks: mocks <= add mocks here
   context: request => ({
     ...request,
     prisma
@@ -14,15 +15,15 @@ const server = new GraphQLServer({
 
 const options = {
   port: process.env.PORT,
-  endpoint: '/api',
-  subscriptions: '/sub',
-  playground: '/playground'
-}
+  endpoint: "/",
+  subscriptions: "/sub",
+  playground: "/playground"
+};
 
 server.start(options, ({ port }) => {
-  const spinner = ora().start()
+  const spinner = ora().start();
   setTimeout(() => {
-      console.log(`Haul Helper API has started! Open on port: ${port}`)
-      spinner.stop()
+    console.log(`Haul Helper API has started! Open on port: ${port}`);
+    spinner.stop();
   }, 1000);
 });
